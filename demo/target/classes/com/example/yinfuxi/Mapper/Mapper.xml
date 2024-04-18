@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yinfuxi.Mapper.Mapper">
+    <select id="selectAll" resultType="com.example.yinfuxi.Lover" >
+        select * from bestlove
+    </select>
+
+    <update id="update">
+        update bestlove
+        <set>
+            <if test="age !=null">
+                age=#{age},
+            </if>
+            <if test="birthday !=null">
+                birthday=#{birthday},
+            </if>
+            <if test="school!= null and school != ''">
+               school=#{school}
+            </if>
+        </set>
+        where name=#{name}
+    </update>
+</mapper>
