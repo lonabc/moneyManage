@@ -1,0 +1,16 @@
+div{
+    position: relative;        
+}
+div:after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url(https://121138hmleadnews.oss-cn-beijing.aliyuncs.com/test/5754118f-1689-46f7-9927-1c3157f52e6d.png);
+    opacity: 0.5;
+}

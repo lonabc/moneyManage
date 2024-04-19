@@ -1,0 +1,19 @@
+body{
+    font-family: sans-serif;/*字体加粗*/
+    background-image:url("https://121138hmleadnews.oss-cn-beijing.aliyuncs.com/test/5754118f-1689-46f7-9927-1c3157f52e6d.png");
+    background-repeat: no-repeat;
+    
+    background-size: cover;
+    overflow: hidden; /* 图片溢出部分隐藏 */
+    background-color:transparent; 
+    /* 设置背景透明，但是css默认就是透明的所以设不设置都一样 */
+    /* 设置图片全覆盖 */
+    
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    background-size: 100%,100%;
+    /* opacity:0.4;
+  filter:alpha(opacity=40);  IE8 及其更早版本 */
+
+}
