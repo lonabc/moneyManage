@@ -76,17 +76,18 @@
         </el-form-item>
         <el-form-item label="当日时间">
           <el-col>
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1"
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.dayTime"
               value-format="yyyy-MM-dd"></el-date-picker>
           </el-col>
         </el-form-item>
 
         <el-form-item label="消费类型">
-          <el-checkbox-group v-model="form.type">
+          <el-checkbox-group v-model="form.classify">
             <el-checkbox label="饮食类" name="type"></el-checkbox>
-            <el-checkbox label="日常用品消费" name="type"></el-checkbox>
+            <el-checkbox label="日用品" name="type"></el-checkbox>
             <el-checkbox label="数码类" name="type"></el-checkbox>
             <el-checkbox label="旅游类" name="type"></el-checkbox>
+            <el-checkbox label="学习用品" name="type"></el-checkbox>
             <el-checkbox label="其他" name="type"></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
@@ -105,8 +106,8 @@
           <el-input v-model.number="ruleForm.userName"></el-input>
         </el-form-item>
 
-        <el-form-item label="出生日期">
-          <el-col>
+        <el-form-item label="出生日期" >
+          <el-col class="moneyform">
             <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.birthday"
               value-format="yyyy-MM-dd"></el-date-picker>
           </el-col>
@@ -133,6 +134,7 @@
       </el-form>
     </el-dialog>
 
+    <el-button @click.native="test12" type="primary">test12</el-button>
 
       <!-- 注册表达测试中 -->
 
@@ -145,9 +147,10 @@ import TestDao from '../static/DaoTest.vue'
 export default {
   components: {
     "comment-box": comment
-  }
-  ,
+  },
+ 
   data() {
+
     var checkAge = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('年龄不能为空'));
@@ -184,6 +187,7 @@ export default {
         }
       };
     return {
+      sum:0,
       inputValue: '',
       showUserForm: false,
       showDialog: false,
@@ -206,8 +210,8 @@ export default {
       },
       form: {
         cost: '',
-        date1: '',
-        type: [],
+        dayTime: '',
+        classify: [],
       },
       ruleForm: {
         userName: '',
@@ -230,8 +234,18 @@ export default {
       }
     }
   },
-
+  watch:{
+    sum(item1,item2)
+    {
+      alert(item1+" "+item2);
+    }
+  }
+  ,
   methods: {
+    test12:function(){
+       this.sum++;
+      console.log("test");
+    },
     closeForm: function () {
       this.showMoeny = false;
     },
@@ -258,15 +272,18 @@ export default {
           let registerForm=new FormData();
           registerForm.append("registerForm",JSON.stringify(this.ruleForm));
           this.$axios.post("http://127.0.0.1:8080/register",{      
+            age: this.ruleForm.age,
+            birthday: this.ruleForm.birthday,
             name: this.ruleForm.userName,
-            password: this.ruleForm.pass
+            school: this.ruleForm.address,
+            password: this.ruleForm.pass,
           },{
             headers:{
               [TestDao.header]:localStorage.getItem(TestDao.header)
             }
           }).then(
             (success)=>{
-              alert(success.data)
+              alert(JSON.stringify(success.data))
             }
           ).catch(error)
           {
@@ -291,7 +308,7 @@ export default {
       }).
         then(
           (success) => {
-            alert(this.form.date1);
+            alert(this.form.dayTime);
             //   alert("数据传输成功");
           },
           (error) => {
@@ -316,7 +333,7 @@ export default {
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 200MB!');
       }
-      setTimeout(function () { location.reload() }, 2000)
+      // setTimeout(function () { location.reload() }, 2000)
       return isJPG && isLt2M;
     },
     testTime: function () {
@@ -360,13 +377,18 @@ export default {
     },
 
     confirmUpload() {
+      this.token = localStorage.getItem(TestDao.header)
       let parm = new FormData();
       this.fileList.forEach((val, index) => {
         parm.append("file", val.raw);
         console.log(val.raw)
         alert(val.raw)
       });
-      this.$axios.post("http://127.0.0.1:8080/controlFile", parm).then(
+      this.$axios.post("http://127.0.0.1:8080/controlFile",parm,{
+        headers: {
+          [TestDao.header]: this.token
+        }
+      }).then(
         (success) => {
           console.log("test success")
         },
@@ -406,9 +428,7 @@ export default {
       )
     },
 
-    testlogin: function () {
-
-    }
+  
 
     // beforeAvatarUpload(file) { 
     //   //限制上传文件大小
@@ -440,5 +460,12 @@ export default {
 
 .dright {
   align-self: flex-end;
+}
+
+.moneyform{
+  display: flex;
+  flex-wrap:wrap;
+  flex-direction: column;
+  align-items: flex-start;
 }
 </style>

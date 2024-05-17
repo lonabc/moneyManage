@@ -16,8 +16,11 @@
       "webpack-env"
     ],
     "paths": {
+      "@/assets": ["src/assets"],
+      "@/api": ["src/api"],
       "@/*": [
         "src/*"
+       
       ]
     },
     "lib": [
