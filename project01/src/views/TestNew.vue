@@ -11,6 +11,7 @@
     </el-table-column>
   </el-table>
   
+  <el-button @click="testlogin()">策划师</el-button>
 </div>
   
 </template>
@@ -29,6 +30,16 @@ export default {
     };
   },
     methods:{
+      testlogin()
+      {
+        this.$axios.post("http://127.0.0.1:8085/login").then(
+          (success)=>
+          {
+            alert("登录成功"+success.data)
+          }
+        )
+      }
+      ,
       getTable()
       {
         TestDao.token = localStorage.getItem(TestDao.header)
