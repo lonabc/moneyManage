@@ -25,7 +25,7 @@
       </el-form>
     </div>
 
-    <el-dialog :visible.sync="showUserForm">
+    <el-dialog :visible.sync="showUserForm" >
       <!-- 通过ref绑定ruleForm属性 -->
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用戶名" prop="userName">
@@ -190,6 +190,7 @@ export default {
     clickFn() {
       this.$refs.statistic.suspend(this.stop);
       this.stop = !this.stop;
+      this.showEmail=false;
     },
     showEmailimp: function () {
       this.showEmail = true;
