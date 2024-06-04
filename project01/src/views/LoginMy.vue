@@ -208,8 +208,7 @@ export default {
         (success) => {
           jwtMy = success.data;
           TestDao.token = jwtMy;
-          localStorage.setItem('token', TestDao.token);
-          alert("登录成功");
+          localStorage.setItem('token', jwtMy);
           window.location.replace("http://10.11.81.209:8000/#/emp") //页面重定向
           //   document.cookie=`auth_token=${token};Secure; HttpOnly; SameSite=Strict`;//注意使用反引号``
           DaoLogin.login = true;

@@ -4,44 +4,44 @@
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu :default-openeds="['1', '3']" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message"></i>导航一</template>
+            <template slot="title"><i class="el-icon-message"></i>管理员页面</template>
             <el-menu-item-group>
               <el-menu-item index="1-1" @click="changeshow3()">用户信息</el-menu-item>
               <el-menu-item index="1-2">选项二</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
-            <template slot="title"><i class="el-icon-menu"></i>导航二</template>
+            <template slot="title"><i class="el-icon-menu"></i>用户页面</template>
             <el-menu-item-group>
               <template slot="title">分组一</template>
               <el-menu-item index="2-1" @click="changeshow2()">个人消费情况</el-menu-item>
               <el-menu-item index="2-2" @click="changeshow1()">消费统计图()</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="分组2">
-              <el-menu-item index="2-3">选项3</el-menu-item>
+              <el-menu-item index="2-3" @click="showOutloginChange()">退出登录</el-menu-item>
             </el-menu-item-group>
             <el-submenu index="2-4">
               <template slot="title">选项4</template>
               <el-menu-item index="2-4-1">选项4-1</el-menu-item>
             </el-submenu>
           </el-submenu>
-          <el-submenu index="3">
-            <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
         </el-menu>
+
+
       </el-aside>
+
+      <el-dialog :visible.sync="showOutlogin">
+        <el-row class="midsignal">
+          <el-col :sm="12" :lg="6">
+            <el-result icon="warning" title="警告提示" subTitle="请根据提示进行操作">
+              <template slot="extra">
+                <el-button type="warning" size="medium" @click.native="loginOut">确定</el-button>
+                <el-button type="primary" size="medium" @click="showOutloginChange">返回</el-button>
+              </template>
+            </el-result>
+          </el-col>
+        </el-row>
+      </el-dialog>
 
 
       <el-container>
@@ -150,14 +150,14 @@
         </transition>
 
         <transition name="el-zoom-in-center">
-          <el-main v-show="show2" class="rightI">
-             <div>
+          <el-main v-show="show2" class="rightI" v-if="refresh1">
+            <div>
               <MoneyMan></MoneyMan>
             </div>
             <div>
               <DateBase1></DateBase1>
             </div>
-           
+
           </el-main>
         </transition>
 
@@ -203,10 +203,12 @@ export default {
   data() {
     return {
       inputValue: '',
-      sum:0,
+      sum: 0,
       tableData: [],
       visible: false,
       refresh: true,
+      refresh1:true,
+      showOutlogin: false,
       visableReally: false,
       showFormMy1: false,
       updataReally: false,
@@ -237,10 +239,9 @@ export default {
       }
     }
   },
-  watch:{
-    sum(item1,item2)
-    {
-        this.getPage();
+  watch: {
+    sum(item1, item2) {
+      this.getPage();
     }
   },
   methods: {
@@ -272,6 +273,14 @@ export default {
       this.formPage.pageStart = val;
       this.getPage();
     },
+
+    loginOut(){
+      localStorage.setItem(TestDao.header,"");
+      TestDao.token="";
+      this.token1="";
+      this.showOutloginChange();
+      location.href = "http://localhost:8000/#/login";
+    },
     getPage() {
       TestDao.token = localStorage.getItem(TestDao.header);
       this.token1 = TestDao.token;
@@ -283,10 +292,10 @@ export default {
         }
       }).then(
         (result) => {
-          
+
           this.tableData = result.data.data;
           this.sumpage = result.data.testData;
-         
+
         }
       ).catch(error)
       {
@@ -309,10 +318,10 @@ export default {
       }).then(
         (success) => {
           //alert(result.data.age);
-          this.refresh=false;
+          this.refresh = false;
           this.sum++;
           this.refresh = true;
-        
+
         }
       )
       this.closeDialog();
@@ -333,8 +342,8 @@ export default {
           alert("数据传输错误")
         }
       ).catch((error) => { console.log(error) })
-     
-     
+
+
       this.closeDialog();
     }
     ,
@@ -389,10 +398,10 @@ export default {
         }
       }).then(
         (success) => {
-          this.refresh=false;
+          this.refresh = false;
           this.$nextTick(() => {
-                this.refresh = true;
-            })
+            this.refresh = true;
+          })
         },
         (error) => {
           alert("请求失败")
@@ -402,6 +411,9 @@ export default {
     },
     updataTest: function () {
       this.updataReally = true;
+    },
+    showOutloginChange: function () {
+      this.showOutlogin = !this.showOutlogin
     },
 
 
@@ -432,12 +444,13 @@ export default {
     'comment-box': comment,
     'MoneyMan': MoneyMan,
     'DateBase1': DateBase1
-  },
+  }
+
 }
 </script>
 
 <style>
-.rightI{
+.rightI {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -467,5 +480,10 @@ export default {
 img {
   max-width: 100%;
   max-height: 100%;
+}
+
+.midsignal{
+  display: flex;
+  justify-content: center;
 }
 </style>
