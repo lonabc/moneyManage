@@ -3,11 +3,8 @@ import router from './router';
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>|
       <router-link to="/emp">TestView</router-link>|
-      <router-link to="/yin">TestNew</router-link>|
-      <router-link to="/login">Login</router-link>
+      <router-link to="/">Login</router-link>
     </nav>
     <router-view/>
   </div>

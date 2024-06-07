@@ -6,3 +6,5 @@ export class User extends Error {
       this.name = name;
     }
   }
+
+export const login=false;

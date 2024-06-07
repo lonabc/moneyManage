@@ -7,23 +7,18 @@
             <template slot="title"><i class="el-icon-message"></i>管理员页面</template>
             <el-menu-item-group>
               <el-menu-item index="1-1" @click="changeshow3()">用户信息</el-menu-item>
-              <el-menu-item index="1-2">选项二</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title"><i class="el-icon-menu"></i>用户页面</template>
             <el-menu-item-group>
-              <template slot="title">分组一</template>
               <el-menu-item index="2-1" @click="changeshow2()">个人消费情况</el-menu-item>
-              <el-menu-item index="2-2" @click="changeshow1()">消费统计图()</el-menu-item>
+              <el-menu-item index="2-2" @click="changeshow1()">消费统计图(未完成)</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
+            <el-menu-item-group>
               <el-menu-item index="2-3" @click="showOutloginChange()">退出登录</el-menu-item>
             </el-menu-item-group>
-            <el-submenu index="2-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-            </el-submenu>
+        
           </el-submenu>
         </el-menu>
 
@@ -195,8 +190,6 @@ import comment from '../elementMy/TestYin.vue'
 import TestDao from '../static/DaoTest.vue'
 import MoneyMan from '../elementMy/ManageMoney.vue'
 import DateBase1 from '../elementMy/DateBase1.vue'
-
-
 
 export default {
 

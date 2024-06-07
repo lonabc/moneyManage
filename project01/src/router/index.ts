@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+
+
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
+  // {
+  //   path: '/',
+  //   name: 'home',
+  //   component: HomeView
+  // },
   {
     path: '/about',
     name: 'about',
@@ -20,21 +22,18 @@ const routes: Array<RouteConfig> = [
   {
     path:'/emp',
     name:'emp',
-    component:()=>import('../views/TestView.vue')
-  },{
-    path:'/yin',
-    name:'yin',
-    component:()=>import('../views/TestNew.vue')
+    component:()=>import('../views/TestView.vue'),
+    
   },
   {
-    path:'/login',
+    path:'/',
     name:'login',
     component:()=>import('../views/LoginMy.vue')
   }
 ]
 
 const router = new VueRouter({
-  routes
+     routes
 })
  
 
