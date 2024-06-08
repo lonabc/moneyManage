@@ -18,7 +18,7 @@
             <el-menu-item-group>
               <el-menu-item index="2-3" @click="showOutloginChange()">退出登录</el-menu-item>
             </el-menu-item-group>
-        
+
           </el-submenu>
         </el-menu>
 
@@ -174,6 +174,18 @@
           </el-footer>
         </transition>
 
+        <el-dialog :visible.sync="show_user">
+          <el-descriptions title="用户信息">
+            <el-descriptions-item label="用户名">{{ formLabelAlignFind.name }}</el-descriptions-item>
+            <el-descriptions-item label="居住地">{{ formLabelAlignFind.school }}</el-descriptions-item>
+            <el-descriptions-item label="年龄">
+              <el-tag size="small">{{ formLabelAlignFind.age }}</el-tag>
+            </el-descriptions-item>
+            <el-descriptions-item label="出生日期">{{ formLabelAlignFind.birthday }}</el-descriptions-item>
+          </el-descriptions>
+
+        </el-dialog>
+
 
 
       </el-container>
@@ -197,10 +209,11 @@ export default {
     return {
       inputValue: '',
       sum: 0,
+      show_user:false,
       tableData: [],
       visible: false,
       refresh: true,
-      refresh1:true,
+      refresh1: true,
       showOutlogin: false,
       visableReally: false,
       showFormMy1: false,
@@ -216,6 +229,12 @@ export default {
       page_start: 0,
       formLabelAlign: {
         name: '',
+        birthday: '',
+        age: '',
+        school: ''
+      },
+      formLabelAlignFind: {
+        name: 'ddd',
         birthday: '',
         age: '',
         school: ''
@@ -238,6 +257,9 @@ export default {
     }
   },
   methods: {
+    showUser(){
+      this.show_user=!this.show_user;
+    },
     testshow1() {
       this.show1 = !this.show1;
     },
@@ -267,10 +289,10 @@ export default {
       this.getPage();
     },
 
-    loginOut(){
-      localStorage.setItem(TestDao.header,"");
-      TestDao.token="";
-      this.token1="";
+    loginOut() {
+      localStorage.setItem(TestDao.header, "");
+      TestDao.token = "";
+      this.token1 = "";
       this.showOutloginChange();
       location.href = "http://localhost:8000/#/login";
     },
@@ -363,8 +385,10 @@ export default {
           if (!success.data.corect) {
             alert("查无此人" + success.data.corect)
           } else {
-            var words = JSON.stringify(success.data.data)//想要将data数据弹出，就要转换成为字符串的形式
-            alert("请求成功" + words)
+            // var words = JSON.stringify(success.data.data)//想要将data数据弹出，就要转换成为字符串的形式
+            this.formLabelAlignFind = success.data.data//想要将data数据弹出，就要转换成为字符串的形式
+            this.showUser();
+            
           }
         },
         (error) => {
@@ -475,7 +499,7 @@ img {
   max-height: 100%;
 }
 
-.midsignal{
+.midsignal {
   display: flex;
   justify-content: center;
 }
