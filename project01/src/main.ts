@@ -5,7 +5,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import * as echarts from 'echarts';
+import VueAnimateNumber from 'vue-animate-number'
 
+Vue.use(VueAnimateNumber)
 Vue.prototype.$echarts = echarts
 
 

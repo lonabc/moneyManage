@@ -174,6 +174,14 @@
           </el-footer>
         </transition>
 
+        <transition>
+          <el-main v-show="show1">
+            <CountMoney>
+
+            </CountMoney>
+           </el-main>
+        </transition>
+
         <el-dialog :visible.sync="show_user">
           <el-descriptions title="用户信息">
             <el-descriptions-item label="用户名">{{ formLabelAlignFind.name }}</el-descriptions-item>
@@ -202,6 +210,7 @@ import comment from '../elementMy/TestYin.vue'
 import TestDao from '../static/DaoTest.vue'
 import MoneyMan from '../elementMy/ManageMoney.vue'
 import DateBase1 from '../elementMy/DateBase1.vue'
+import CountMoney from '../elementMy/CountMoney.vue'
 
 export default {
 
@@ -460,7 +469,8 @@ export default {
   components: {//组件的注册
     'comment-box': comment,
     'MoneyMan': MoneyMan,
-    'DateBase1': DateBase1
+    'DateBase1': DateBase1,
+    'CountMoney': CountMoney
   }
 
 }
