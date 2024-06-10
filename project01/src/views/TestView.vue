@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-container style="height: 500px; border: 1px solid #eee ;">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <meta name="viewport" content="user-scalable=no, width=device-width,initial-scale=1.0,maximum-scale=0.3">
+    <el-container class="changeI">
+      <el-aside class="changeII">
         <el-menu :default-openeds="['1', '3']" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-message"></i>导航一</template>
@@ -179,11 +180,24 @@
           </el-footer>
         </transition>
 
+<<<<<<< Updated upstream
 
+=======
+        <el-dialog :visible.sync="show_user">
+          <el-descriptions title="用户信息">
+            <el-descriptions-item label="用户名">{{ formLabelAlignFind.name }}</el-descriptions-item>
+            <el-descriptions-item label="居住地">{{ formLabelAlignFind.school }}</el-descriptions-item>
+            <el-descriptions-item label="年龄">
+              <el-tag size="small">{{ formLabelAlignFind.age }}</el-tag>
+            </el-descriptions-item>
+            <el-descriptions-item label="出生日期">{{ formLabelAlignFind.birthday }}</el-descriptions-item>
+          </el-descriptions>
+
+        </el-dialog>
+>>>>>>> Stashed changes
 
       </el-container>
     </el-container>
-
   </div>
 </template>
 
@@ -437,7 +451,38 @@ export default {
 </script>
 
 <style>
+<<<<<<< Updated upstream
 .rightI{
+=======
+@media screen and (min-width:1290px) and (max-width:2000px){
+  .changeI{
+  height: 500px;
+  border: 1px solid #eee;
+ }
+ .changeII{
+    width: 200px;
+  }
+}
+
+@media screen and (min-width: 10px) and (max-width:1280px){
+  .rightI{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .changeI{
+    height: 50%;
+ }
+  .changeII{
+    width: 10%;
+    background-color: rgb(223, 228, 237)
+  }
+}
+
+
+.rightI {
+>>>>>>> Stashed changes
   display: flex;
   flex-direction: row;
   justify-content: space-around;

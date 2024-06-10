@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <el-radio-group v-model="labelPosition" size="small">
-      <el-radio-button label="left">左对齐</el-radio-button>
-      <el-radio-button label="right">右对齐</el-radio-button>
-      <el-radio-button label="top">顶部对齐</el-radio-button>
-    </el-radio-group>
-    <div style="margin: 20px;"></div>
+  <div class="alljustify">
+    <meta name="viewport" content="user-scalable=no, width=device-width,initial-scale=1.0,maximum-scale=0.42">
+    <div class="box">
+      <el-radio-group v-model="labelPosition" size="small">
+        <el-radio-button label="left">左对齐</el-radio-button>
+        <el-radio-button label="right">右对齐</el-radio-button>
+        <el-radio-button label="top">顶部对齐</el-radio-button>
+      </el-radio-group>
+    </div>
+    <div style="margin: 2%; "></div>
     <div class="chl_box">
       <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
         <el-form-item label="名称" style="width: 100%">
@@ -25,7 +28,11 @@
       </el-form>
     </div>
 
+<<<<<<< Updated upstream
     <el-dialog :visible.sync="showUserForm">
+=======
+    <el-dialog :visible.sync="showUserForm" style="width: 80%; ">
+>>>>>>> Stashed changes
       <!-- 通过ref绑定ruleForm属性 -->
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用戶名" prop="userName">
@@ -61,7 +68,7 @@
     </el-dialog>
 
     <el-dialog :visible.sync="showEmail">
-      <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
+      <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="10%" class="demo-dynamic">
         <el-form-item prop="email" label="邮箱" :rules="[
           { required: true, message: '请输入邮箱地址', trigger: 'blur' },
           { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
@@ -69,27 +76,25 @@
           <el-input v-model="dynamicValidateForm.email"></el-input>
         </el-form-item>
         <div class="leftandright">
-          <el-form-item  label="验证码" style="width: 80%;">
-              <el-input v-model="dynamicValidateForm.code"></el-input>
+          <el-form-item label="验证码" style="width: 80%;">
+            <el-input v-model="dynamicValidateForm.code"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button @click="testRester();getCode()">获取验证码</el-button>
+            <el-button @click="testRester(); getCode()">获取验证码</el-button>
           </el-form-item>
         </div>
-        <el-form-item >
-          <el-statistic :value="deadline2" time-indices title="꒰ᐢ⸝⸝•༝•⸝⸝ᐢ꒱ ​​验证码已发送" v-if="refresh"  ref="statistic">
-              <template slot="suffix">
-                距离验证码到期还剩
-              </template>
+        <el-form-item>
+          <el-statistic :value="deadline2" time-indices title="꒰ᐢ⸝⸝•༝•⸝⸝ᐢ꒱ ​​验证码已发送" v-if="refresh" ref="statistic">
+            <template slot="suffix">
+              距离验证码到期还剩
+            </template>
           </el-statistic>
         </el-form-item label="邮箱验证码">
         <el-form-item>
-          <el-button type="primary" @click="clickFn(); sumbitEmail()" >登录</el-button>
+          <el-button type="primary" @click="clickFn(); sumbitEmail()">登录</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
-
-
   </div>
 </template>
 
@@ -136,7 +141,7 @@ export default {
     return {
       stop: true,
       deadline2: Date.now() + 1000 * 60,
-      refresh:false,
+      refresh: false,
       dynamicValidateForm: {
         email: '',
         code: ''
@@ -170,15 +175,13 @@ export default {
     };
   },
   methods: {
-    testRester()
-    {
-       this.refresh=false;
-       this.deadline2= Date.now() + 1000 * 60;
-       this.$nextTick(()=>
-      {
-        this.refresh=true;
+    testRester() {
+      this.refresh = false;
+      this.deadline2 = Date.now() + 1000 * 60;
+      this.$nextTick(() => {
+        this.refresh = true;
       })
-      
+
     },
     hilarity() {
       this.$notify({
@@ -190,6 +193,10 @@ export default {
     clickFn() {
       this.$refs.statistic.suspend(this.stop);
       this.stop = !this.stop;
+<<<<<<< Updated upstream
+=======
+      this.showEmail = false;
+>>>>>>> Stashed changes
     },
     showEmailimp: function () {
       this.showEmail = true;
@@ -260,40 +267,39 @@ export default {
     },
     sumbitEmail: function () {
       let formdata = new FormData();
-      formdata.append("loginEmail",JSON.stringify(this.dynamicValidateForm));
+      formdata.append("loginEmail", JSON.stringify(this.dynamicValidateForm));
 
-      this.$axios.post("http://127.0.0.1:8080/loginCode",formdata).then(
-        (success)=>{
-          let jwtMy=success.data;
-          TestDao.token=jwtMy;
-          localStorage.setItem('token',TestDao.token)
+      this.$axios.post("http://127.0.0.1:8080/loginCode", formdata).then(
+        (success) => {
+          let jwtMy = success.data;
+          TestDao.token = jwtMy;
+          localStorage.setItem('token', TestDao.token)
           console.log(JSON.stringify(jwtMy))
         },
-        (error)=>{
+        (error) => {
           alert("登录失败")
         }
-      ).catch((error)=>{
+      ).catch((error) => {
         console.log(error);
       })
     },
-  
-    getCode:function()
-    {
-  
-       const emails= this.dynamicValidateForm.email
-       this.$axios.get(`http://127.0.0.1:8080/testCode/${emails}`).then(
-        (success)=>{
+
+    getCode: function () {
+
+      const emails = this.dynamicValidateForm.email
+      this.$axios.get(`http://127.0.0.1:8080/testCode/${emails}`).then(
+        (success) => {
           alert(this.dynamicValidateForm.email);
         },
-        (error)=>{
+        (error) => {
           alert(this.dynamicValidateForm.email);
           alert("验证失败")
         }
-       ).catch(
-        (error)=>{
+      ).catch(
+        (error) => {
           console.log(error)
         }
-       )
+      )
     }
   }
 }
@@ -305,15 +311,16 @@ export default {
 }
 
 .chl_box {
-  width: 800px;
-  height: 600px;
+  flex-grow: 2;
+  width: 100%;
+  /* height: 70%;
   position: absolute;
   top: 20px;
   left: 0;
   right: 0;
-  bottom: 0;
-  margin: auto;
-  /* background: #00FFFF; */
+  bottom: 0; */
+  /* margin: auto; */
+
 }
 
 .moneyform {
@@ -328,6 +335,52 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: nowrap;
+}
+
+/* @media screen and(min-width: 700px) {
+  .alljustify{
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+} */
+/* 
+@media screen and(max-width: 400px) {
+  .chl_box {
+    flex-grow: 2;
+    width: 60%;
+  }
+   */
+@media screen and (min-width:1000px) and (max-width:2000px){
+  .chl_box{
+    flex-grow: 2;
+    width: 40%;
+    margin: auto;
+  }
+}
+
+.alljustify {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.box {
+  flex-grow: 1;
+
+}
+
+.box2 {
+  flex-grow: 2;
+}
+
+.demo-ruleForm{
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: auto;
+  background-color: lightblue;
+  padding: 10px;
 }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">

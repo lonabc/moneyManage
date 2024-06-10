@@ -1,5 +1,21 @@
 <template>
 	<div class="Echarts">
+<<<<<<< Updated upstream
+=======
+
+		<e-header>
+			<!-- <el-button type="info" @click="testMethod()">编辑</el-button>
+			<el-button type="primary" icon="el-icon-search" @click="showDateChange()">搜索</el-button> -->
+			<div class="div2">
+				<i class="el-icon-search" @click="showDateChange()"></i>
+				<!-- <div style="margin: 0px 20px;"></div> -->
+				<i class="el-icon-edit" @click="testMethod()"></i>
+				<i class="el-icon-refresh" @click="costAll()"></i>
+			</div>
+		</e-header>
+
+
+>>>>>>> Stashed changes
 		<el-main>
 			<div id="main" style="width: 600px;height:400px;"  v-if="refresh"></div>
 		</el-main>

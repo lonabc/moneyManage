@@ -40,17 +40,17 @@ const router = new VueRouter({
 
 
 //导航守卫
-router.beforeEach((to,form,next)=>{
-  if(to.name !== 'login' && !localStorage.getItem("token"))
-  {
-    next({name:'login'})
-  }
-  else 
-  {
-    next();
-  }
-  console.log(to)
-  console.log(form)
-})
+// router.beforeEach((to,form,next)=>{
+//   if(to.name !== 'login' && !localStorage.getItem("token"))
+//   {
+//     next({name:'login'})
+//   }
+//   else 
+//   {
+//     next();
+//   }
+//   console.log(to)
+//   console.log(form)
+// })
 
 export default router

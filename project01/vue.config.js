@@ -1,5 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
+  // publicPath : './', //注意，可能导致出错
   lintOnSave: false,
 
   transpileDependencies: [
@@ -12,7 +13,7 @@ module.exports = defineConfig({
     client:{
       overlay:false
     },
-    
+    open:true ,
   },
 
   pluginOptions: {

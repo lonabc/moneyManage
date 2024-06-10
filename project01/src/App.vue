@@ -1,5 +1,4 @@
 
-import router from './router';
 <template>
   <div id="app">
     <nav>
