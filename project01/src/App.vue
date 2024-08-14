@@ -1,10 +1,12 @@
 
-import router from './router';
+
 <template>
-  <div id="app">
+  <div id="app"> 
     <nav>
       <router-link to="/emp">TestView</router-link>|
-      <router-link to="/">Login</router-link>
+      <router-link to="/login">Login</router-link>|
+      <!-- <router-link to="/show">show</router-link>| -->
+      <router-link to="/">begian</router-link>
     </nav>
     <router-view/>
   </div>

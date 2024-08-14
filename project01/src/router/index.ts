@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
+import Begain from '../views/Begain.vue'
 import HomeView from '../views/HomeView.vue'
+import store from '@/store'
+import ShowMoney from '@/views/ShowMoney.vue'
 
 
 Vue.use(VueRouter)
@@ -13,6 +16,7 @@ const routes: Array<RouteConfig> = [
   // },
   {
     path: '/about',
+    redirect:'/ab',
     name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -22,27 +26,45 @@ const routes: Array<RouteConfig> = [
   {
     path:'/emp',
     name:'emp',
-    component:()=>import('../views/TestView.vue'),
-    
+    component:()=>import('../views/TestView.vue')
+  },
+  {
+    path:'/login',
+    name:'login',
+    component:()=>import('../views/LoginMy.vue')
+  },
+  {
+    path:'/show/:words?',
+    name:'showMoney',
+    component:()=> import('../views/ShowMoney.vue')
   },
   {
     path:'/',
-    name:'login',
-    component:()=>import('../views/LoginMy.vue')
+    name:'begian',
+    component:()=> import('../views/Begain.vue')
+  },
+  {
+    path:'*',
+    name:'404',
+    component: ()=>{'../views/AboutView.vue'}
   }
 ]
 
 const router = new VueRouter({
-     routes
+     routes,
 })
  
 
 
-//导航守卫
+//导航守卫 !store.state.areLogin
 router.beforeEach((to,form,next)=>{
-  if(to.name !== 'login' && !localStorage.getItem("token"))
+  if(to.name === 'begian')
   {
-    next({name:'login'})
+    next()
+  }
+  else if((to.name !== 'login') && !localStorage.getItem("token"))
+  {
+     next({name:'login'})
   }
   else 
   {
@@ -51,5 +73,6 @@ router.beforeEach((to,form,next)=>{
   console.log(to)
   console.log(form)
 })
+
 
 export default router

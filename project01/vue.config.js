@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   lintOnSave: false,
-
+  //publicPath: '/begain', //设置vue项目启动路径
   transpileDependencies: [
     'quasar'
   ],

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="backgroundmy">
     <el-radio-group v-model="labelPosition" size="small">
       <el-radio-button label="left">左对齐</el-radio-button>
       <el-radio-button label="right">右对齐</el-radio-button>
@@ -8,7 +8,7 @@
     <div style="margin: 20px;"></div>
     <div class="chl_box">
       <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-        <el-form-item label="名称" style="width: 100%">
+        <el-form-item label="名称" style="width: 100%;">
           <el-input v-model="formLabelAlign.name"></el-input>
         </el-form-item>
         <div class="leftandright">
@@ -25,7 +25,7 @@
       </el-form>
     </div>
 
-    <el-dialog :visible.sync="showUserForm" >
+    <el-dialog :visible.sync="showUserForm" append-to-body >
       <!-- 通过ref绑定ruleForm属性 -->
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用戶名" prop="userName">
@@ -60,7 +60,7 @@
       </el-form>
     </el-dialog>
 
-    <el-dialog :visible.sync="showEmail">
+    <el-dialog :visible.sync="showEmail" append-to-body>
       <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
         <el-form-item prop="email" label="邮箱" :rules="[
           { required: true, message: '请输入邮箱地址', trigger: 'blur' },
@@ -88,15 +88,17 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-
-
   </div>
 </template>
 
 <script>
 import TestDao from '../static/DaoTest.vue'
+import { mapState } from 'vuex';
 
 export default {
+  computed:{
+    ...mapState(['areLogin'])
+  },
   data() {
     var checkAge = (rule, value, callback) => {
       if (!value) {
@@ -203,20 +205,23 @@ export default {
       let formMy = new FormData()
       var jwtMy
       var headers = TestDao.header
+
       formMy.append("loginForm", JSON.stringify(this.formLabelAlign))
-      this.$axios.post("http://127.0.0.1:8080/loginV2", formMy).then(
+      alert(JSON.stringify(this.formLabelAlign))
+      this.$axios.post("http://127.0.0.1:8080/loginV2",formMy).then(
         (success) => {
           jwtMy = success.data;
           TestDao.token = jwtMy;
           localStorage.setItem('token', jwtMy);
-          window.location.replace("http://127.0.0.1:8000/#/emp") //页面重定向
+          this.$store.commit('testLoginStatus',true)
+          window.location.replace("http://localhost:8000/#/emp") //页面重定向
           //   document.cookie=`auth_token=${token};Secure; HttpOnly; SameSite=Strict`;//注意使用反引号``
-          DaoLogin.login = true;
-
+ 
         },
         (error) => {
-          window.alert("登录失败")
-          throw new MyCustomError("登录失败")
+          window.alert("登录失败");
+          // this.$store.commit('testLoginStatus',false);
+   
         }
       ).catch((error) => {
         console.log(error);
@@ -262,6 +267,7 @@ export default {
       let formdata = new FormData();
       formdata.append("loginEmail",JSON.stringify(this.dynamicValidateForm));
 
+  
       this.$axios.post("http://127.0.0.1:8080/loginCode",formdata).then(
         (success)=>{
           let jwtMy=success.data;
@@ -299,7 +305,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.backgroundmy{
+   background-image: url('../assets/tree.png');
+   background-size: cover;
+   background-attachment: fixed;
+   position: fixed;
+   width:100%;		
+    height:100%;		
+    position:fixed;
+
+}
+
 .testSize {
   width: 200px
 }

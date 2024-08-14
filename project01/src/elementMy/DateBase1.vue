@@ -13,7 +13,7 @@
 
 
 		<el-main>
-			<div id="main" style="width: 600px;height:350px;" v-if="refresh"></div>
+			<div id="main" style="width: 600px;height:350px; margin: 0;" v-if="refresh"></div>
 		</el-main>
 		<el-footer>
 			<!-- <el-button type="danger" @click="testMethod()">增添消费</el-button> -->
@@ -36,7 +36,7 @@
 							<el-checkbox label="数码类" name="type"></el-checkbox>
 							<el-checkbox label="旅游类" name="type"></el-checkbox>
 							<el-checkbox label="学习用品" name="type"></el-checkbox>
-							<el-checkbox label="其他" name="type"></el-checkbox>
+							<el-checkbox label="收入" name="type"></el-checkbox>
 						</el-checkbox-group>
 					</el-form-item>
 				</el-form>
@@ -60,8 +60,12 @@
 </template>
 <script>
 import DaoTest from '@/static/DaoTest.vue';
+import { mapState } from 'vuex';
 export default {
 	name: 'Echarts', //图标
+	computed:{
+		 ...mapState(['count'])
+	},
 	data() {
 		return {
 
@@ -86,6 +90,13 @@ export default {
 				this.costAll();
 			}
 		},
+		count:{
+			handler(item1,item2)
+			{
+				this.costAll();
+			}
+		},
+
 		deep: true
 	},
 	methods: {
@@ -136,6 +147,7 @@ export default {
 
 						this.refresh = false;
 						this.sum++;
+						this.$store.commit('testCount');
 						this.refresh = true;
 						this.closeForm();
 						//   alert("数据传输成功");
@@ -205,8 +217,6 @@ export default {
 	},
 	mounted() {
 		this.costAll();
-
-
 	}
 }
 

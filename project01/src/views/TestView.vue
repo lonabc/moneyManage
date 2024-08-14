@@ -13,25 +13,32 @@
             <template slot="title"><i class="el-icon-menu"></i>用户页面</template>
             <el-menu-item-group>
               <el-menu-item index="2-1" @click="changeshow2()">个人消费情况</el-menu-item>
-              <el-menu-item index="2-2" @click="changeshow1()">消费统计图(未完成)</el-menu-item>
+              <el-menu-item index="2-2">消费统计图(未完成)</el-menu-item>
             </el-menu-item-group>
+            
             <el-menu-item-group>
               <el-menu-item index="2-3" @click="showOutloginChange()">退出登录</el-menu-item>
             </el-menu-item-group>
 
+            <el-menu-item-group>
+              <el-menu-item index="2-4" @click="changePage()">车市</el-menu-item>
+            </el-menu-item-group>
           </el-submenu>
         </el-menu>
 
 
       </el-aside>
 
+
       <el-dialog :visible.sync="showOutlogin">
         <el-row class="midsignal">
           <el-col :sm="12" :lg="6">
             <el-result icon="warning" title="警告提示" subTitle="请根据提示进行操作">
               <template slot="extra">
-                <el-button type="warning" size="medium" @click.native="loginOut">确定</el-button>
+                <div style="display: flex; justify-content: space-around; ">
+                <el-button type="warning" size="medium" @click="loginOut">确定</el-button>
                 <el-button type="primary" size="medium" @click="showOutloginChange">返回</el-button>
+              </div>
               </template>
             </el-result>
           </el-col>
@@ -40,6 +47,7 @@
 
 
       <el-container>
+        <router-view></router-view>
         <el-header style="text-align: right; font-size: 12px">
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
@@ -115,8 +123,7 @@
 
                 <el-button type="button" @click="updataForm()">sumbit</el-button>
               </el-dialog>
-
-              <el-dropdown-item @click.native="setEyes()">删除</el-dropdown-item>
+              <el-dropdown-item @click.native="setEyes(elRow.name)" >删除</el-dropdown-item>
               <!--  对话框出现时弹框未出现，添加:append-to-body="true"即可· -->
               <el-dialog :visible.sync="visableReally" :append-to-body="true">
                 <el-input v-model="inputValue" placeholder="请输入需要删除的人员姓名"> </el-input>
@@ -173,14 +180,22 @@
             </div>
           </el-footer>
         </transition>
-
+<!-- 
         <transition>
           <el-main v-show="show1">
             <CountMoney>
 
             </CountMoney>
            </el-main>
-        </transition>
+        </transition> -->
+
+        <!-- <el-dialog :visible.sync="show1">
+          <div v-if="this.refresh2">
+            <CountMoney ref="CompTable" :key="new Date().getTime()">
+
+            </CountMoney>
+          </div>
+        </el-dialog> -->
 
         <el-dialog :visible.sync="show_user">
           <el-descriptions title="用户信息">
@@ -210,7 +225,7 @@ import comment from '../elementMy/TestYin.vue'
 import TestDao from '../static/DaoTest.vue'
 import MoneyMan from '../elementMy/ManageMoney.vue'
 import DateBase1 from '../elementMy/DateBase1.vue'
-import CountMoney from '../elementMy/CountMoney.vue'
+// import CountMoney from '../elementMy/CountMoney.vue'
 
 export default {
 
@@ -223,6 +238,7 @@ export default {
       visible: false,
       refresh: true,
       refresh1: true,
+      refresh2:true,
       showOutlogin: false,
       visableReally: false,
       showFormMy1: false,
@@ -266,18 +282,16 @@ export default {
     }
   },
   methods: {
+    changePage(){
+       this.$router.push('/show')
+    },
     showUser(){
       this.show_user=!this.show_user;
     },
     testshow1() {
       this.show1 = !this.show1;
     },
-    changeshow1() {
-      this.show2 = false;
-      this.show3 = false;
-
-      setTimeout(this.testshow1, 1000)
-    },
+  
     changeshow2() {
       this.show1 = false;
       this.show3 = false;
@@ -303,6 +317,7 @@ export default {
       TestDao.token = "";
       this.token1 = "";
       this.showOutloginChange();
+      this.$store.commit('testLoginStatus',false)
       location.href = "http://localhost:8000/#/login";
     },
     getPage() {
@@ -470,9 +485,7 @@ export default {
     'comment-box': comment,
     'MoneyMan': MoneyMan,
     'DateBase1': DateBase1,
-    'CountMoney': CountMoney
   }
-
 }
 </script>
 

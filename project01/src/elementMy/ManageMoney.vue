@@ -42,7 +42,7 @@
 							<el-checkbox label="数码类" name="type"></el-checkbox>
 							<el-checkbox label="旅游类" name="type"></el-checkbox>
 							<el-checkbox label="学习用品" name="type"></el-checkbox>
-							<el-checkbox label="其他" name="type"></el-checkbox>
+							<el-checkbox label="收入" name="type"></el-checkbox>
 						</el-checkbox-group>
 					</el-form-item>
           <el-form-item label="消费金额" style="width: 50%;">
@@ -76,14 +76,21 @@
 </template>
 <script>
 import DaoTest from '@/static/DaoTest.vue';
+import { mapState } from 'vuex';
+
 export default {
+  props:{
+    visible: Boolean
+  },
+  computed:{
+    ...mapState(['count'])
+  },
   name: 'Echarts', //图标1
   refresh: true,
   watch: {
     trigger: {
       handler(item1, item2) {
         this.showMoney();
-
       }
     }
   },
@@ -156,7 +163,9 @@ export default {
         }
       }).then(
         (success)=>{
-           console.log("删除成功")
+           console.log("删除成功");
+           this.$store.commit('testCount');
+           this.showSizeForm=!this.showSizeForm;
         }
       )
     },
@@ -173,7 +182,8 @@ export default {
       }).then(
         (success) => {
           this.refresh=false;
-          console.log("发送成功");
+          this.$store.commit('testCount');
+          this.showSizeForm=!this.showSizeForm;
           this.refresh=true;
         },
         (error) => {
