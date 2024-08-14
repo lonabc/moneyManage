@@ -11,7 +11,8 @@ import VueAnimateNumber from 'vue-animate-number'
 import store from './store/index';
 import moment from 'moment';
 import LineChart from './elementMy/LineChart.vue'
-
+import VueParticles from 'vue-particles'  
+Vue.use(VueParticles) 
 
 Vue.use(VueAnimateNumber)
 Vue.prototype.$echarts = echarts

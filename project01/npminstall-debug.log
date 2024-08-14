@@ -3,7 +3,7 @@
   registry: 'https://registry.npmmirror.com',
   pkgs: [
     {
-      name: '@type/vue-animate-number',
+      name: '@types/vue-particles',
       version: 'latest',
       type: 'tag',
       alias: undefined,
@@ -15,8 +15,8 @@
   cacheDir: 'C:\\Users\\24822\\.npminstall_tarball',
   env: {
     npm_config_registry: 'https://registry.npmmirror.com',
-    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\24822\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","--save-dev","@type/vue-animate-number"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\24822\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","--save-dev","@type/vue-animate-number"]}',
-    npm_config_user_agent: 'npminstall/7.12.0 npm/? node/v20.9.0 win32 x64',
+    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\24822\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","--save-dev","@types/vue-particles"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\24822\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","--save-dev","@types/vue-particles"]}',
+    npm_config_user_agent: 'npminstall/7.12.0 npm/? node/v20.13.1 win32 x64',
     npm_config_cache: 'C:\\Users\\24822\\.npminstall_tarball',
     NODE: 'D:\\nodejs\\node.exe',
     npm_node_execpath: 'D:\\nodejs\\node.exe',
