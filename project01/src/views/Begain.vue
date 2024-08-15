@@ -7,22 +7,21 @@
             <img src="@/assets/logoB.png" style="width:100px;  height: 100px;">
         </div>
 
-        <div class="boxTxt">
-            <h2 style="color:#76777a;" class="textT">欢迎来到，消费管理系统</h2>
+        <div>
+            <h2 style="color:#76777a; " class="boxTxt">{{ this.headerTxt }}</h2>
             <!-- 文本区域 -->
-            <p style="color: aliceblue; font-size: 25px;text-indent:50px">
+            <p style="color: aliceblue; font-size: 25px;text-indent:50px ; position:absolute ;top: 50%;">
                 欢迎来到消费管理系统，这是一个专为帮助个人统计和管理消费而设计的网页应用。
-                我们的目标是帮助用户了解自己的消费习惯，优化支出，做到理性消费。无论你是希望攒钱，还是想更好地管理财务，消费管理系统都是你不可或缺的工具。通过科学的
-
-                消费管理，你将能够实现理性的消费习惯，达到财务自由的目标。
+                我们的目标是帮助用户了解自己的消费习惯，优化支出，做到理性消费。无论你是希望攒钱，还是想更好地管理财务，消费管理系统都是你不可或缺的工具。
+                通过科学的消费管理，你将能够实现理性的消费习惯，达到财务自由的目标。
 
                 加入我们，开启你的理性消费之旅吧！
             </p>
         </div>
 
-        <a  class="buttonMy">
+        <a class="buttonMy">
             <el-button type="info" plain @click="changePage"
-                style="position: absolute; bottom: 100px;">开启理想消费之旅</el-button>
+                style="position: absolute; bottom: 200px;">开启理想消费之旅</el-button>
         </a>
 
 
@@ -47,6 +46,12 @@ export default {
     data() {
         return {
             drawer: false,
+            headerTxt: "",
+            headerw: ["欢迎来到消费管理系统"],
+            indexa: 0,
+            headerW: new Array(11),
+            typeingInterval: null,
+            currentIndex: 0,
             direction: 'rtl',
         };
     },
@@ -61,7 +66,34 @@ export default {
                     done();
                 })
                 .catch(_ => { });
+        },
+
+        typeLine() {
+            console.log(this.headerw[0].length)
+            if (this.currentIndex >= this.headerw[0].length) {clearInterval(this.typeingInterval);  setTimeout(this.loadWords,3000)}
+            else {
+                if (this.headerTxt == null) { this.headerTxt = this.headerW[0][this.currentIndex]; this.currentIndex++; } else {
+                    this.headerTxt += this.headerw[0][this.currentIndex];
+                    this.currentIndex++;
+                }
+            }
+           
+        },
+        loadWords() {
+
+            this.currentIndex=0;
+            this.headerTxt="";
+            if (this.typeingInterval) {
+                clearInterval(this.typeingInterval);
+            }
+            this.typeingInterval = setInterval(this.typeLine, 200)
+
         }
+    },
+    mounted() {
+
+        this.loadWords()
+
     }
 };
 
@@ -105,16 +137,13 @@ export default {
     height: 150px;
     width: auto;
     min-height: 150px;
+
     max-height: 300px;
-
-}
-
-.textT {
-    position: relative;
     text-align: center;
     font-size: 50px;
 
 }
+
 
 .mylog {
     position: absolute;

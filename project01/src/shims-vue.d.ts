@@ -6,3 +6,4 @@ declare module '*.vue' {
 declare module "@/static/DaoLogin.js"
 declare module "vue-animate-number"
 declare module "vue-particles"
+declare module "vue-lottie"

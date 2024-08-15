@@ -12,6 +12,7 @@
             <div class="parentBox" style=" background-color: #e6a23a;">
                 <p>本日消费共计</p>
                 <h1 style="color:bisque" v-showNum v-if="showDay">{{ dayMoney }}</h1>
+               
             </div>
         </div>
         <div>
@@ -45,6 +46,7 @@ import Fence from '@/components/Fence.vue'
 import LineChart from '@/elementMy/LineChart.vue';
 import * as THREE from 'three'
 import BIRDS from 'vanta/src/vanta.birds'
+
 
 
 export default {

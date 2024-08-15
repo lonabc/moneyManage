@@ -12,8 +12,10 @@ import store from './store/index';
 import moment from 'moment';
 import LineChart from './elementMy/LineChart.vue'
 import VueParticles from 'vue-particles'  
-import VWave from 'v-wave'
 
+import VWave from 'v-wave'
+import lottie from 'vue-lottie'
+Vue.component('lottie',lottie)
 
 Vue.use(VWave)
 Vue.use(VueParticles) 
