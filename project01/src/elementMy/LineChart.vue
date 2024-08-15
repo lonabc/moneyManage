@@ -72,19 +72,15 @@ export default {
                         type: 'line',
                         // 设置小圆点消失
                         symbolSize: 8,
-                        // itemStyle: {
-                        //     normal: {
-                        //         // 拐点上显示数值
-                        //         label: {
-                        //             show: true
-                        //         },
-                        //         borderColor: 'red',  // 拐点边框颜色
-                        //         lineStyle: {
-                        //             width: 5,  // 设置线宽
-                        //             type: 'solid'  //'dotted'虚线 'solid'实线
-                        //         }
-                        //     }
-                        // },
+                        itemStyle: {
+                            normal: {
+                                // 拐点上显示数值
+                                label: {
+                                    show: true
+                                },
+                              
+                            }
+                        },
                         // 注意：设置symbol: 'none'以后，拐点不存在了，设置拐点上显示数值无效
                         // symbol: 'none',
                         // 设置折线弧度，取值：0-1之间

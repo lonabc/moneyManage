@@ -12,6 +12,10 @@ import store from './store/index';
 import moment from 'moment';
 import LineChart from './elementMy/LineChart.vue'
 import VueParticles from 'vue-particles'  
+import VWave from 'v-wave'
+
+
+Vue.use(VWave)
 Vue.use(VueParticles) 
 
 Vue.use(VueAnimateNumber)

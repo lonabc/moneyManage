@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div ref='vantaRef'>
         <div class="justify">
             <div class="parentBox" style=" background-color: #E4E7ED;">
                 <p>本月消费共计</p>
@@ -14,8 +14,9 @@
                 <h1 style="color:bisque" v-showNum v-if="showDay">{{ dayMoney }}</h1>
             </div>
         </div>
-
-        <Fence v-if="chartShow1" :cost="allMoneyMonth" :input="inputMoney"></Fence>
+        <div>
+            <Fence v-if="chartShow1" :cost="allMoneyMonth" :input="inputMoney"></Fence>
+        </div>
         <div style="display: flex; justify-content:flex-start;">
             <div class="PieChart">
                 <div v-if="chartShow">
@@ -42,6 +43,9 @@ import { Result } from 'element-ui';
 import PieChart from '@/elementMy/PieChart.vue';
 import Fence from '@/components/Fence.vue'
 import LineChart from '@/elementMy/LineChart.vue';
+import * as THREE from 'three'
+import BIRDS from 'vanta/src/vanta.birds'
+
 
 export default {
     data() {
@@ -156,9 +160,31 @@ export default {
         })
     },
     mounted: function () {
+        this.vantaEffect = BIRDS({
+            el: this.$refs.vantaRef,
+            THREE: THREE
+        })
+        this.vantaEffect.setOptions({
+            el: this.$refs.vantaRef,
+            color1: 0x3900ff,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            backgroundColor: 0xdedede,
+        })
 
+    },
 
+    beforeDestroy() {
+        if (this.vantaEffect) {
+            this.vantaEffect.destroy()
+        }
     }
+
 }
 
 </script>

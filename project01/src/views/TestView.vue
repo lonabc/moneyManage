@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <el-container style="height: 500px; border: 1px solid #eee ;">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu :default-openeds="['1', '3']" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
@@ -15,7 +15,7 @@
               <el-menu-item index="2-1" @click="changeshow2()">个人消费情况</el-menu-item>
               <el-menu-item index="2-2">消费统计图(未完成)</el-menu-item>
             </el-menu-item-group>
-            
+
             <el-menu-item-group>
               <el-menu-item index="2-3" @click="showOutloginChange()">退出登录</el-menu-item>
             </el-menu-item-group>
@@ -36,9 +36,9 @@
             <el-result icon="warning" title="警告提示" subTitle="请根据提示进行操作">
               <template slot="extra">
                 <div style="display: flex; justify-content: space-around; ">
-                <el-button type="warning" size="medium" @click="loginOut">确定</el-button>
-                <el-button type="primary" size="medium" @click="showOutloginChange">返回</el-button>
-              </div>
+                  <el-button type="warning" size="medium" @click="loginOut">确定</el-button>
+                  <el-button type="primary" size="medium" @click="showOutloginChange">返回</el-button>
+                </div>
               </template>
             </el-result>
           </el-col>
@@ -123,7 +123,7 @@
 
                 <el-button type="button" @click="updataForm()">sumbit</el-button>
               </el-dialog>
-              <el-dropdown-item @click.native="setEyes(elRow.name)" >删除</el-dropdown-item>
+              <el-dropdown-item @click.native="setEyes(elRow.name)">删除</el-dropdown-item>
               <!--  对话框出现时弹框未出现，添加:append-to-body="true"即可· -->
               <el-dialog :visible.sync="visableReally" :append-to-body="true">
                 <el-input v-model="inputValue" placeholder="请输入需要删除的人员姓名"> </el-input>
@@ -180,7 +180,7 @@
             </div>
           </el-footer>
         </transition>
-<!-- 
+        <!-- 
         <transition>
           <el-main v-show="show1">
             <CountMoney>
@@ -225,6 +225,8 @@ import comment from '../elementMy/TestYin.vue'
 import TestDao from '../static/DaoTest.vue'
 import MoneyMan from '../elementMy/ManageMoney.vue'
 import DateBase1 from '../elementMy/DateBase1.vue'
+
+
 // import CountMoney from '../elementMy/CountMoney.vue'
 
 export default {
@@ -233,12 +235,12 @@ export default {
     return {
       inputValue: '',
       sum: 0,
-      show_user:false,
+      show_user: false,
       tableData: [],
       visible: false,
       refresh: true,
       refresh1: true,
-      refresh2:true,
+      refresh2: true,
       showOutlogin: false,
       visableReally: false,
       showFormMy1: false,
@@ -282,16 +284,16 @@ export default {
     }
   },
   methods: {
-    changePage(){
-       this.$router.push('/show')
+    changePage() {
+      this.$router.push('/show')
     },
-    showUser(){
-      this.show_user=!this.show_user;
+    showUser() {
+      this.show_user = !this.show_user;
     },
     testshow1() {
       this.show1 = !this.show1;
     },
-  
+
     changeshow2() {
       this.show1 = false;
       this.show3 = false;
@@ -317,7 +319,7 @@ export default {
       TestDao.token = "";
       this.token1 = "";
       this.showOutloginChange();
-      this.$store.commit('testLoginStatus',false)
+      this.$store.commit('testLoginStatus', false)
       location.href = "http://localhost:8000/#/login";
     },
     getPage() {
@@ -412,7 +414,7 @@ export default {
             // var words = JSON.stringify(success.data.data)//想要将data数据弹出，就要转换成为字符串的形式
             this.formLabelAlignFind = success.data.data//想要将data数据弹出，就要转换成为字符串的形式
             this.showUser();
-            
+
           }
         },
         (error) => {
@@ -475,6 +477,7 @@ export default {
     }
   },
   mounted: function () {
+  
     this.getPage();
   },
   // updated: function () {

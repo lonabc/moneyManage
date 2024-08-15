@@ -25,7 +25,7 @@
               <el-button type="primary" @click="showEmailimp()">邮箱登录</el-button>
             </el-form-item>
           </div>
-          <el-button style="text-align:center" @click="loginMy()">登录</el-button>
+          <el-button style="text-align:center" @click="loginMy()" >登录</el-button>
           <el-button @click="showUser" type="primary" plain>注册</el-button>
         </el-form>
       </div>
