@@ -13,16 +13,16 @@
             <template slot="title"><i class="el-icon-menu"></i>用户页面</template>
             <el-menu-item-group>
               <el-menu-item index="2-1" @click="changeshow2()">个人消费情况</el-menu-item>
-              <el-menu-item index="2-2">消费统计图(未完成)</el-menu-item>
+              <el-menu-item index="2-2" @click="changePage()">消费统计图</el-menu-item>
             </el-menu-item-group>
 
             <el-menu-item-group>
               <el-menu-item index="2-3" @click="showOutloginChange()">退出登录</el-menu-item>
             </el-menu-item-group>
-
+<!-- 
             <el-menu-item-group>
-              <el-menu-item index="2-4" @click="changePage()">车市</el-menu-item>
-            </el-menu-item-group>
+              <el-menu-item index="2-4" >车市</el-menu-item>
+            </el-menu-item-group> -->
           </el-submenu>
         </el-menu>
 
@@ -123,7 +123,7 @@
 
                 <el-button type="button" @click="updataForm()">sumbit</el-button>
               </el-dialog>
-              <el-dropdown-item @click.native="setEyes(elRow.name)">删除</el-dropdown-item>
+              <el-dropdown-item @click.native="setEyes()">删除</el-dropdown-item>
               <!--  对话框出现时弹框未出现，添加:append-to-body="true"即可· -->
               <el-dialog :visible.sync="visableReally" :append-to-body="true">
                 <el-input v-model="inputValue" placeholder="请输入需要删除的人员姓名"> </el-input>
@@ -446,9 +446,6 @@ export default {
             this.refresh = true;
           })
         },
-        (error) => {
-          alert("请求失败")
-        }
       ).catch((error) => { console.log(error) })
 
     },
