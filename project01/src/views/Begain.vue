@@ -26,7 +26,7 @@
 
 
         <div class="foldmy">
-            <i class="el-icon-s-fold" @click="drawer = true" type="primary" style="margin-left: 16px;"></i>
+            <i class="el-icon-s-fold" @click="drawer = true" type="primary" style="position: relative; font-size: 30px; margin-left: 16px; bottom: 60px;"></i>
         </div>
         <el-drawer :visible.sync="drawer" :direction="direction" :before-close="handleClose">
             <div class="routerArrange">
@@ -69,8 +69,8 @@ export default {
         },
 
         typeLine() {
-            console.log(this.headerw[0].length)
-            if (this.currentIndex >= this.headerw[0].length) {clearInterval(this.typeingInterval);  setTimeout(this.loadWords,3000)}
+ 
+            if (this.currentIndex >= this.headerw[0].length) {clearInterval(this.typeingInterval); }
             else {
                 if (this.headerTxt == null) { this.headerTxt = this.headerW[0][this.currentIndex]; this.currentIndex++; } else {
                     this.headerTxt += this.headerw[0][this.currentIndex];
@@ -86,8 +86,7 @@ export default {
             if (this.typeingInterval) {
                 clearInterval(this.typeingInterval);
             }
-            this.typeingInterval = setInterval(this.typeLine, 200)
-
+            this.typeingInterval=setInterval(this.typeLine,200)
         }
     },
     mounted() {
@@ -159,11 +158,11 @@ export default {
 
 .videoT {
     position: absolute;
-    top: 10%;
+
     left: 0;
     min-width: 100%;
-    height: auto;
-    width: auto;
+    height: 100%;;
+    width: 100%;
     object-fit: cover;
     -webkit-filter: grayscale(40%);
 }

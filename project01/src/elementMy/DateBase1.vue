@@ -113,7 +113,7 @@ export default {
 			this.showMoeny = true;
 		},
 		testSelect: function () {
-			this.$axios.get(`http://localhost:8080/user/selectMoneyByTime/${this.textarea1}`, {
+			this.$axios.get(`http://localhost:8081/user/selectMoneyByTime/${this.textarea1}`, {
 				headers: {
 					[DaoTest.header]: this.token1
 				}
@@ -137,7 +137,7 @@ export default {
 		submitMoney() {
 			let form1 = new FormData();
 			form1.append("form1", JSON.stringify(this.form));
-			this.$axios.post("http://127.0.0.1:8080/user/moneyRember", form1, {
+			this.$axios.post("http://127.0.0.1:8081/user/moneyRember", form1, {
 				headers: {
 					[DaoTest.header]: localStorage.getItem(DaoTest.header)
 				}
@@ -165,7 +165,7 @@ export default {
 			DaoTest.token = localStorage.getItem(DaoTest.header);
 
 			this.token1 = DaoTest.token;
-			this.$axios.get("http://localhost:8080/user/CostAll", {
+			this.$axios.get("http://localhost:8081/user/CostAll", {
 				headers: {
 					[DaoTest.header]: this.token1
 				}

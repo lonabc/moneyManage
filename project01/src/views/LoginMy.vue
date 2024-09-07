@@ -213,7 +213,7 @@ export default {
 
       formMy.append("loginForm", JSON.stringify(this.formLabelAlign))
       alert(JSON.stringify(this.formLabelAlign))
-      this.$axios.post("http://127.0.0.1:8080/loginV2", formMy).then(
+      this.$axios.post("http://127.0.0.1:8081/loginV2", formMy).then(
         (success) => {
           jwtMy = success.data;
           TestDao.token = jwtMy;
@@ -242,7 +242,7 @@ export default {
         if (valid) {
           let registerForm = new FormData();
           registerForm.append("registerForm", JSON.stringify(this.ruleForm));
-          this.$axios.post("http://127.0.0.1:8080/register", {
+          this.$axios.post("http://127.0.0.1:8081/register", {
             age: this.ruleForm.age,
             birthday: this.ruleForm.birthday,
             name: this.ruleForm.userName,
@@ -273,7 +273,7 @@ export default {
       formdata.append("loginEmail", JSON.stringify(this.dynamicValidateForm));
 
 
-      this.$axios.post("http://127.0.0.1:8080/loginCode", formdata).then(
+      this.$axios.post("http://127.0.0.1:8081/loginCode", formdata).then(
         (success) => {
           let jwtMy = success.data;
           TestDao.token = jwtMy;
@@ -291,7 +291,7 @@ export default {
     getCode: function () {
 
       const emails = this.dynamicValidateForm.email
-      this.$axios.get(`http://127.0.0.1:8080/testCode/${emails}`).then(
+      this.$axios.get(`http://127.0.0.1:8081/testCode/${emails}`).then(
         (success) => {
           alert(this.dynamicValidateForm.email);
         },

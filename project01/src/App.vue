@@ -2,12 +2,12 @@
 
 <template>
   <div id="app"> 
-    <nav>
+    <!-- <nav>
       <router-link to="/emp">TestView</router-link>|
       <router-link to="/login">Login</router-link>|
-      <!-- <router-link to="/show">show</router-link>| -->
+      <router-link to="/show">show</router-link>|
       <router-link to="/">begian</router-link>
-    </nav>
+    </nav> -->
     <router-view/>
   </div>
 </template>

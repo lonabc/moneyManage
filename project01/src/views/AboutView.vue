@@ -41,7 +41,7 @@
         <el-button type="button" @click="testForm()" id="ha">sumbit</el-button>
       </el-dialog>
 
-      <form action="http://127.0.0.1:8080/upload" method="post" enctype="multipart/form-data">
+      <form action="http://127.0.0.1:8081/upload" method="post" enctype="multipart/form-data">
         姓名:<input type="text" name="username"><br>
         年龄：<input type="text" name="age"><br>
         头像：<input type="file" name="image"><br>
@@ -49,7 +49,7 @@
         <input type="submit" value="提交">
       </form>
 
-      <el-upload class="upload-demo" action="http://127.0.0.1:8080/controlFile" :on-change="handleChange"
+      <el-upload class="upload-demo" action="http://127.0.0.1:8081/controlFile" :on-change="handleChange"
         :file-list="fileList" :headers="headers">
         <el-button size="small" @click="confirmUpload()">点击上传</el-button>
         <div slot="tip" class="el-upload__tip">上传文件类型不限，但不超过200MB</div>
@@ -271,7 +271,7 @@ export default {
         if (valid) {
           let registerForm=new FormData();
           registerForm.append("registerForm",JSON.stringify(this.ruleForm));
-          this.$axios.post("http://127.0.0.1:8080/register",{      
+          this.$axios.post("http://127.0.0.1:8081/register",{      
             age: this.ruleForm.age,
             birthday: this.ruleForm.birthday,
             name: this.ruleForm.userName,
@@ -301,7 +301,7 @@ export default {
     submitMoney() {
       let form1 = new FormData();
       form1.append("form1", JSON.stringify(this.form));
-      this.$axios.post("http://127.0.0.1:8080/user/moneyRember", form1, {
+      this.$axios.post("http://127.0.0.1:8081/user/moneyRember", form1, {
         headers: {
           [TestDao.header]: localStorage.getItem(TestDao.header)
         }
@@ -342,7 +342,7 @@ export default {
       alert(this.value1)
       let timeMy = new FormData();
       timeMy.append("value1", this.value1);
-      this.$axios.post("http://127.0.0.1:8080/timeMy", timeMy, {
+      this.$axios.post("http://127.0.0.1:8081/timeMy", timeMy, {
         headers: {
           [TestDao.header]: this.token
         }
@@ -360,7 +360,7 @@ export default {
       this.token = localStorage.getItem(TestDao.header)
       let data = new FormData();
       data.append("name", this.inputValue);
-      this.$axios.post("http://127.0.0.1:8080/delete", data, {
+      this.$axios.post("http://127.0.0.1:8081/delete", data, {
         headers: {
           [TestDao.header]: this.token
         }
@@ -384,7 +384,7 @@ export default {
         console.log(val.raw)
         alert(val.raw)
       });
-      this.$axios.post("http://127.0.0.1:8080/controlFile",parm,{
+      this.$axios.post("http://127.0.0.1:8081/controlFile",parm,{
         headers: {
           [TestDao.header]: this.token
         }
@@ -406,7 +406,7 @@ export default {
         name: '影',
         school: '车市'
       }
-      this.$axios.post("http://127.0.0.1:8080/selectSome", data1).then(
+      this.$axios.post("http://127.0.0.1:8081/selectSome", data1).then(
         (success) => {
           alert("请求成功" + age)
         },
@@ -421,7 +421,7 @@ export default {
     testForm: function () { //传递参数给后端2
       let formData = new FormData()
       formData.append("form", JSON.stringify(this.formLabelAlign))
-      this.$axios.post("http://127.0.0.1:8080/insert", formData).then(
+      this.$axios.post("http://127.0.0.1:8081/insert", formData).then(
         result => {
           alert(result.data.age);
         }

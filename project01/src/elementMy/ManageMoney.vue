@@ -105,7 +105,7 @@ export default {
       console.log(`当前页: ${this.formPage.pageStart}`);
     },
     selectMoneyByTime1: function () {
-      this.$axios.get(`http://127.0.0.1:8080/user/CostTime/${this.textarea1}`,
+      this.$axios.get(`http://127.0.0.1:8081/user/CostTime/${this.textarea1}`,
        {
           headers: {
             [DaoTest.header]: this.token1
@@ -129,7 +129,7 @@ export default {
       DaoTest.token = localStorage.getItem(DaoTest.header);
       this.token1 = DaoTest.token;
 
-      this.$axios.get(`http://127.0.0.1:8080/user/moneyAll/${this.formPage.pageStart}&${this.formPage.pageSize}`,
+      this.$axios.get(`http://127.0.0.1:8081/user/moneyAll/${this.formPage.pageStart}&${this.formPage.pageSize}`,
         {
           headers: {
             [DaoTest.header]: this.token1
@@ -153,7 +153,7 @@ export default {
     },
     deleteItem:function()
     {
-      this.$axios.post("http://127.0.0.1:8080/user/deleteItem",{
+      this.$axios.post("http://127.0.0.1:8081/user/deleteItem",{
         dayTime: this.sizeForm.dayTime,
         cost: this.sizeForm.cost,
         classify: this.sizeForm.classify
@@ -171,7 +171,7 @@ export default {
     },
     updateMOney: function () {
 
-      this.$axios.post("http://127.0.0.1:8080/user/moneyChange", {
+      this.$axios.post("http://127.0.0.1:8081/user/moneyChange", {
         dayTime: this.sizeForm.dayTime,
         cost: this.sizeForm.cost,
         classify: this.sizeForm.classify
@@ -192,7 +192,7 @@ export default {
       )
     },
     selectMoneyByTime: function () {
-      this.$axios.get("http://127.0.0.1:8080/user/selectMoneyByTime", this.selectTime, {
+      this.$axios.get("http://127.0.0.1:8081/user/selectMoneyByTime", this.selectTime, {
         headers: {
           [DaoTest.header]: this.token1
         }
