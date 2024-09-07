@@ -1,5 +1,7 @@
 <template>
-    <div ref='vantaRef'>
+    <div>
+        <div ref='vantaRef' style="position: absolute; width: 100%; height: 100%;"></div>
+        <i class="el-icon-d-arrow-left" style="font-size: 40px; position: relative; left:48%" @click="goback()"></i>
         <div class="justify">
             <div class="parentBox" style=" background-color: #E4E7ED;">
                 <p>本月消费共计</p>
@@ -32,6 +34,7 @@
                 <LineChart></LineChart>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -90,10 +93,13 @@ export default {
     },
 
     methods: {
+        goback(){
+            this.$router.push('/emp')
+        },
         testww() {
             request({
                 methods: "get",
-                url: `http://127.0.0.1:8080/show/totalMonth/${this.month}`,
+                url: `http://127.0.0.1:8081/show/totalMonth/${this.month}`,
                 headers: {
                     [TestDao.header]: localStorage.getItem('token')
                 }
@@ -177,6 +183,7 @@ export default {
             scale: 1.00,
             scaleMobile: 1.00,
             backgroundColor: 0xdedede,
+            
         })
 
     },
@@ -193,6 +200,7 @@ export default {
 
 <style>
 .justify {
+    position: relative;
     display: flex;
     flex-direction: row;
     margin: auto;

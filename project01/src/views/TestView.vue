@@ -14,6 +14,7 @@
             <el-menu-item-group>
               <el-menu-item index="2-1" @click="changeshow2()">个人消费情况</el-menu-item>
               <el-menu-item index="2-2" @click="changePage()">消费统计图</el-menu-item>
+              <el-menu-item index="2-3" @click="changePage2()">返回首页</el-menu-item>
             </el-menu-item-group>
 
             <el-menu-item-group>
@@ -284,6 +285,9 @@ export default {
     }
   },
   methods: {
+    changePage2(){
+       this.$router.push('/')
+    },
     changePage() {
       this.$router.push('/show')
     },
@@ -327,7 +331,7 @@ export default {
       this.token1 = TestDao.token;
       let pagemy = new FormData();
       pagemy.append("page", JSON.stringify(this.formPage));
-      this.$axios.post("http://127.0.0.1:8080/pageHelperA", pagemy, {
+      this.$axios.post("http://127.0.0.1:8081/pageHelperA", pagemy, {
         headers: {
           [TestDao.header]: this.token1
         }
@@ -352,7 +356,7 @@ export default {
       let formData = new FormData()
       formData.append("form", JSON.stringify(this.formLabelAlign))
       alert(JSON.stringify(this.formLabelAlign))
-      this.$axios.post("http://127.0.0.1:8080/insert", formData, {
+      this.$axios.post("http://127.0.0.1:8081/insert", formData, {
         headers: {
           [TestDao.header]: this.token1
         }
@@ -370,7 +374,7 @@ export default {
     updataForm() {
       let eupdata = new FormData()
       eupdata.append("form", JSON.stringify(this.formLabelAlignUpdata))
-      this.$axios.post("http://127.0.0.1:8080/updata", eupdata, {
+      this.$axios.post("http://127.0.0.1:8081/updata", eupdata, {
         headers: {
           [TestDao.header]: this.token1
         }
@@ -402,7 +406,7 @@ export default {
     sumbitFind() {
       let f = new FormData();
       f.append("name", this.inputValue);
-      this.$axios.post("http://127.0.0.1:8080/list", f, {
+      this.$axios.post("http://127.0.0.1:8081/list", f, {
         headers: {
           [TestDao.header]: this.token1
         }
@@ -435,7 +439,7 @@ export default {
     sumbit() {
       let f = new FormData();
       f.append("name", this.inputValue)
-      this.$axios.post("http://127.0.0.1:8080/delete", f, {
+      this.$axios.post("http://127.0.0.1:8081/delete", f, {
         headers: {
           [TestDao.header]: this.token1
         }
@@ -458,7 +462,7 @@ export default {
 
 
     gettotal: function () {
-      this.$axios.get("http://127.0.0.1:8080/gettotal", {
+      this.$axios.get("http://127.0.0.1:8081/gettotal", {
         headers: {
           [TestDao.header]: this.token1
         }
